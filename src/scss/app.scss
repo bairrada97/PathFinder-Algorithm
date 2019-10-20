@@ -1,0 +1,44 @@
+/* Core variables */
+@import "base/variables";
+
+/* CSS Reset */
+@import "base/reset";
+
+/* Fonts */
+@import "base/fonts";
+
+/* Mixins, helpers and functions */
+@import "base/mixins";
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(50, 30px);
+  grid-template-rows: repeat(15, 30px);
+
+  li {
+    list-style: none;
+    border: 1px solid blue;
+    width: 30px;
+    height: 30px;
+
+    &.node-start {
+      background: green;
+    }
+
+    &.node-end {
+      background: red;
+    }
+
+    &.node-visited {
+      background: pink;
+    }
+
+    &.node-shortestPath {
+      background: yellow;
+    }
+
+    &.node-wall {
+      background: black;
+    }
+  }
+}
