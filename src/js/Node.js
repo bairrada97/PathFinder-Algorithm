@@ -17,6 +17,7 @@ export class Node extends Behaviors(Board) {
     const node = document.createElement("li");
     node.dataset.row = this.row;
     node.dataset.col = this.col;
+    
     const addClass = this.isStart ? "node-start" : this.isEnd ? "node-end" : "";
     addClass ? node.classList.add(addClass) : "";
 

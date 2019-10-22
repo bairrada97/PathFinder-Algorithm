@@ -1,4 +1,5 @@
 import { Dijkstra } from "./index";
+import { Maze } from "./index";
 import { Node } from "./index";
 
 export class Board {
@@ -11,7 +12,6 @@ export class Board {
     this.finishNodeRow = 10;
     this.finishNodeCol = 35;
     this.boardContainer = document.createElement("div");
-    this.isMousePressed = false;
   }
 
   renderBoard() {
@@ -29,9 +29,13 @@ export class Board {
     }
   }
 
-  static isMousedPressed() {
-    debugger;
-    return this.isMousePressed;
+  visualizeMaze(){
+    const grid = this.board;
+    
+    const maze = new Maze(grid);
+
+    maze.init();
+    
   }
 
   async visualizeDijkstra() {
@@ -39,8 +43,8 @@ export class Board {
     const startNode = this.board[this.startNodeRow][this.startNodeCol];
     const endNode = this.board[this.finishNodeRow][this.finishNodeCol];
     const dijsktra = new Dijkstra(grid, startNode, endNode);
-    const visitedNodes = dijsktra.init();
 
+    const visitedNodes = dijsktra.init();
     const shortestPath = dijsktra.getShortestPath(endNode);
     await this.animateDijkstra(visitedNodes);
     await this.animateShortestPath(shortestPath);
