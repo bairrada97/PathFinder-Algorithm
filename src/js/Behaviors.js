@@ -4,14 +4,28 @@ export const Behaviors = superclass =>
   class extends superclass {
     handleMouseDown() {
       isMousePressed = true;
-      this.isWall = true;
-      event.currentTarget.classList.add("node-wall");
+   
+      if (!this.isWall){
+        this.isWall = true;
+        event.currentTarget.classList.add("node-wall");
+
+      }else{
+        this.isWall = false;
+        event.currentTarget.classList.remove("node-wall");
+
+      }
     }
 
     handleMouseEnter() {
       if (!isMousePressed) return;
-      this.isWall = true;
-      event.currentTarget.classList.add("node-wall");
+      if (!this.isWall) {
+        this.isWall = true;
+        event.currentTarget.classList.add("node-wall");
+
+      }else{
+         this.isWall = false;
+         event.currentTarget.classList.remove("node-wall");
+      }
     }
 
     handleMouseUp() {

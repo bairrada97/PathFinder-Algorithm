@@ -1,36 +1,49 @@
+//populate board walls
+//while something
+//get random line and create a wall vertically 
+//if the number is higher than the half of the  grid change to horizontally
+
+
 export class Maze {
     constructor(grid) {
        this.grid = grid;
+       this.orientation = "vertically";
 
     }
 
     init(){
         const randomLine = Math.floor(Math.random() * this.grid.length);
-        const randomPassage = Math.floor(Math.random() * randomCol);
-        this.divideRegions();
-    }
+        const randomPassage = Math.floor(Math.random() * randomLine);
 
-    divideRegions(){
-          
-          const random = this.grid[randomCol];
-
-          this.grid = this.grid.filter((node) => !node.iswall)
-
-          for (let i = 0; i < random.length; i++) {
-              random[i].isWall = true;
-              random[randomPassage].isWall = false;
-              const visitedElement = document.querySelector(`li[data-row="${random[i].row}"][data-col="${random[i].col}"]`);
-              visitedElement.classList.add('node-wall');
-          }
-          
-
-          const ze = document.querySelector(`li[data-row="${ random[randomPassage].row}"][data-col="${random[randomPassage].col}"]`);
-          ze.classList.remove('node-wall');
-
-    }
-
-    addWall(){
+        randomLine < this.grid.length / 2 ? this.orientation = "horizontal" : this.orientation = "vertical";
+             
+        this.addBoardWalls(randomLine);
+        //this.addWall(this.grid[randomLine], this.grid[randomPassage] );
         
+    }
+    addBoardWalls() {
+
+        for (let i = 0; i < this.grid.length; i++) {
+
+             this.addWall(this.grid[i][0]);
+             this.addWall(this.grid[i][this.grid[i].length - 1]);
+
+            for (let j = 0; j < this.grid[i].length; j++) {
+
+                this.addWall(this.grid[0][j]);
+                this.addWall(this.grid[this.grid.length - 1][j]);
+       
+            }
+        
+        }
+     
+    }
+    addWall(line, passage) {
+         line.isWall = true;
+         //passage ? line[passage].isWall = false : "";
+         const visitedElement = document.querySelector(`li[data-row="${line.row}"][data-col="${line.col}"]`);
+         visitedElement.classList.add('node-wall');
     }
 
 }
+ 

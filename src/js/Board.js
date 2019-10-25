@@ -18,6 +18,7 @@ export class Board {
     this.boardContainer.className = "board";
     document.querySelector(".app").append(this.boardContainer);
     //render bidimensional board
+
     for (let i = 0; i < this.rowSize; i++) {
       const currentRow = [];
       for (let j = 0; j < this.colSize; j++) {
@@ -44,10 +45,18 @@ export class Board {
     const endNode = this.board[this.finishNodeRow][this.finishNodeCol];
     const dijsktra = new Dijkstra(grid, startNode, endNode);
 
+    document.querySelector('#audio').play();
+
     const visitedNodes = dijsktra.init();
     const shortestPath = dijsktra.getShortestPath(endNode);
+   
     await this.animateDijkstra(visitedNodes);
     await this.animateShortestPath(shortestPath);
+
+     document.querySelector('#audio').pause();
+   
+
+
   }
 
   async animateDijkstra(visitedNodes) {
